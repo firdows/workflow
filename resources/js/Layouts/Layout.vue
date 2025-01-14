@@ -37,14 +37,13 @@ import { Link } from "@inertiajs/vue3";
       >
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
-
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="/">
                 <span data-feather="home"></span>
                 Dashboard
               </a>
             </li>
-            
+
             <li class="nav-item">
               <Link href="/" class="nav-link">Home</Link>
             </li>
@@ -77,7 +76,11 @@ import { Link } from "@inertiajs/vue3";
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <slot />
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3"
+        >
+          <slot />
+        </div>
       </main>
     </div>
   </div>
