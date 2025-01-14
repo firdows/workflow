@@ -15,3 +15,7 @@ Route::get('/', function () {
 Route::get('/test', function () {
     return inertia('Test', ['name' => request('name', 'test')]);
 });
+
+Route::get('/test1', function () {
+    return inertia('Test', ['name' => request('name', 'test')]);
+});
