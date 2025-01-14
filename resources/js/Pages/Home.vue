@@ -1,3 +1,3 @@
 <template>
-  <h1>Hello World  555555666sssssdd</h1>
+  <h1 class="text-success">Hello World</h1>
 </template>
