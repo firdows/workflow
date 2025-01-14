@@ -1,3 +1,7 @@
+<script setup>
+import { Link } from "@inertiajs/vue3";
+</script>
+
 <template>
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
@@ -33,25 +37,24 @@
       >
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
+
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">
+              <a class="nav-link" aria-current="page" href="/">
                 <span data-feather="home"></span>
                 Dashboard
               </a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="/test">
-                <span data-feather="file"></span>
-                Test
-              </a>
+              <Link href="/" class="nav-link">Home</Link>
+            </li>
+
+            <li class="nav-item">
+              <Link href="/test" class="nav-link">Test</Link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/test?name=6666">
-                <span data-feather="shopping-cart"></span>
-                Test2
-              </a>
+              <Link href="/test?name=6666" class="nav-link">Test2</Link>
             </li>
-           
           </ul>
 
           <h6
@@ -67,24 +70,6 @@
               <a class="nav-link" href="#">
                 <span data-feather="file-text"></span>
                 Current month
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Last quarter
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Social engagement
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
-                Year-end sale
               </a>
             </li>
           </ul>
