@@ -3,6 +3,15 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+    // base: "./",
+    // build: {
+    //     outDir: 'dist',
+    //     assetsDir: 'assets',
+    //   },
+    // server: {
+    //     https: true,
+    //     host: 'dev.baansanfun.com',
+    // },
     plugins: [
         vue(),
         laravel({
