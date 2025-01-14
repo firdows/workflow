@@ -1,3 +1,13 @@
+<script setup>
+  import Layout from "../Layouts/Layout.vue";
+  const test = 'Component';
+  
+</script>
+
+
 <template>
-  <h1 class="text-success">Hello World</h1>
+  <Layout>
+    <h1 class="text-success">Hello World {{test}}1</h1>
+  </Layout>
+  
 </template>

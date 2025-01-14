@@ -13,5 +13,5 @@ Route::get('/', function () {
 
 
 Route::get('/test', function () {
-    return Inertia::render('Home');
+    return Inertia::render('Home',['test'=>'test']);
 });
