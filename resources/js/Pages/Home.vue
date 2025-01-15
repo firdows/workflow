@@ -3,10 +3,11 @@ import Layout from "../Layouts/Layout.vue";
 import { Head } from "@inertiajs/vue3";
 const test = "Component";
 
-defineOptions({ layout: Layout });
+// defineOptions({ layout: Layout });
 </script>
 
 <template>
+
   <Head>
     <title>Home</title>
   </Head>
