@@ -5,7 +5,7 @@ defineProps({
   name: String,
 });
 
-defineOptions({ layout: Layout });
+// defineOptions({ layout: Layout });
 const test = "Component";
 </script>
 
