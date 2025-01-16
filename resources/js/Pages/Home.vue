@@ -7,9 +7,9 @@ const test = "Component";
 </script>
 
 <template>
-
+  <Head title="Home"></Head>
   <Head>
     <title>Home</title>
   </Head>
-  <h1 class="text-success">Hello World {{ test }}1</h1>
+  <h1 class="text-success">Hello World {{ test }}</h1>
 </template>

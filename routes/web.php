@@ -11,11 +11,18 @@ Route::get('/', function () {
     return Inertia::render('Home');
 });
 
+Route::get('/about', function () {
+    return inertia('About');
+});
 
 Route::get('/test', function () {
     return inertia('Test', ['name' => request('name', 'test')]);
 });
 
-Route::get('/test1', function () {
+
+Route::get('/progress', function () {
+    sleep(2);
     return inertia('Test', ['name' => request('name', 'test')]);
 });
+
+
