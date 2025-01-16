@@ -3,12 +3,8 @@ import { Head, Link } from "@inertiajs/vue3";
 </script>
 
 <template>
-  <Head>
-    <title>Layout</title>
-    <link rel="icon" href="/favicon.ico" />
-  </Head>
   <div>
-    <header class="bg-green-500 text-white">
+    <header class="bg-indigo-500 text-white">
       <nav
         class="flex items-center justify-between p-4 max-w-screen-lg mx-auto"
       >
@@ -18,11 +14,9 @@ import { Head, Link } from "@inertiajs/vue3";
           <Link href="/about">About</Link>
           <Link href="/test">Test</Link>
           <Link href="/test?name=Ahamad">Test(param)</Link>
-          <Link href="/progress">Progress</Link>
         </div>
       </nav>
     </header>
-
     <main class="p-4 pt-8 max-w-screen-lg mx-auto">
       <slot></slot>
     </main>
