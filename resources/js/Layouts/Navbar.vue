@@ -169,6 +169,7 @@ const navigation = [
   { name: "Test(param)", href: "/test?name=Ahamad", current: false },
   { name: "Progress", href: "/progress", current: false },
   { name: "Shared Data", href: "/shared-data", current: false },
+  { name: "ScrollPreservation", href: route("ScrollPreservation"), current: false },
 ];
 </script>
 

@@ -30,3 +30,8 @@ Route::get('/shared-data', function () {
 });
 
 
+Route::get('/scroll-preservation', function () {  
+    return inertia('ScrollPreservation');
+})->name("ScrollPreservation");
+
+
