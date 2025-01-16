@@ -47,7 +47,7 @@
         >
           {{ $page.props.auth.user }}
 
-          <Link href="route('register')">Register</Link>
+          <Link :href="route('register')">Register</Link>
 
           <button
             type="button"

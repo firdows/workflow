@@ -38,3 +38,5 @@ Route::get('/scroll-preservation', function () {
 
 Route::get('/register', [UserController::class, 'register'])
     ->name('register');
+
+Route::post('/register', [UserController::class, 'save_register'])->name('save_register');
