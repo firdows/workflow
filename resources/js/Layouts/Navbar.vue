@@ -45,7 +45,7 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-          {{ $page.props.auth.user }}
+          {{ $page.props.auth.user.name }}
 
           <Link :href="route('register')">Register</Link>
 
@@ -91,7 +91,7 @@
                       active ? 'bg-gray-100 outline-none' : '',
                       'block px-4 py-2 text-sm text-gray-700',
                     ]"
-                    >{{ $page.props.auth.user }}</a
+                    >{{ $page.props.auth.user.name }}</a
                   >
                 </MenuItem>
                 <MenuItem v-slot="{ active }">
