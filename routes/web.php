@@ -25,4 +25,8 @@ Route::get('/progress', function () {
     return inertia('Test', ['name' => request('name', 'test')]);
 });
 
+Route::get('/shared-data', function () {  
+    return inertia('SharedData');
+});
+
 

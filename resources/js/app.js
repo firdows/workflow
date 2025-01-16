@@ -6,10 +6,11 @@ import Layout from "./Layouts/Layout.vue";
 // import MainAdminLte from "./Layouts/AdminLTE3/Main.vue";
 
 createInertiaApp({
-    title: (title) => `My App ${title}`,
+    title: (title) => `${title} | My App`,
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
         let page = pages[`./Pages/${name}.vue`];
+        console.log(page);
         page.default.layout = page.default.layout || Layout;
         return page;
     },
@@ -23,7 +24,7 @@ createInertiaApp({
         // The delay after which the progress bar will appear, in milliseconds...
         // delay: 250,
         // The color of the progress bar...
-        color: '#f00',
+        color: '#fff',
         // Whether to include the default NProgress styles...
         includeCSS: true,
         // Whether the NProgress spinner will be shown...

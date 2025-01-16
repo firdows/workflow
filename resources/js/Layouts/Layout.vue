@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
+import Navbar from "./Navbar.vue";
 </script>
 
 <template>
@@ -9,18 +10,20 @@ import { Head, Link } from "@inertiajs/vue3";
   </Head>
   <div>
     <header class="bg-green-500 text-white">
-      <nav
+      <Navbar />
+
+      <!-- <nav
         class="flex items-center justify-between p-4 max-w-screen-lg mx-auto"
       >
         <div class="space-x-6">
-          <!-- <a href="/">Home</a> -->
           <Link href="/">Home</Link>
           <Link href="/about">About</Link>
           <Link href="/test">Test</Link>
           <Link href="/test?name=Ahamad">Test(param)</Link>
           <Link href="/progress">Progress</Link>
+          <Link href="/shared-data">Shared Data</Link>
         </div>
-      </nav>
+      </nav> -->
     </header>
 
     <main class="p-4 pt-8 max-w-screen-lg mx-auto">
