@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,13 +26,15 @@ Route::get('/progress', function () {
     return inertia('Test', ['name' => request('name', 'test')]);
 });
 
-Route::get('/shared-data', function () {  
+Route::get('/shared-data', function () {
     return inertia('SharedData');
 });
 
 
-Route::get('/scroll-preservation', function () {  
+Route::get('/scroll-preservation', function () {
     return inertia('ScrollPreservation');
 })->name("ScrollPreservation");
 
 
+Route::get('/register', [UserController::class, 'register'])
+    ->name('register');

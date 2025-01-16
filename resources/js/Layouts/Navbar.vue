@@ -45,7 +45,10 @@
         <div
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
-        {{ $page.props.auth.user }}
+          {{ $page.props.auth.user }}
+
+          <Link href="route('register')">Register</Link>
+
           <button
             type="button"
             class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -163,13 +166,17 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { Head, Link } from "@inertiajs/vue3";
 
 const navigation = [
-  { name: "Home", href: route('home'), current: true },
-  { name: "About", href: route('about'), current: false },
-//   { name: "test", href: "/test", current: false },
+  { name: "Home", href: route("home"), current: true },
+  { name: "About", href: route("about"), current: false },
+  //   { name: "test", href: "/test", current: false },
   { name: "Test(param)", href: "/test?name=Ahamad", current: false },
   { name: "Progress", href: "/progress", current: false },
   { name: "Shared Data", href: "/shared-data", current: false },
-  { name: "ScrollPreservation", href: route("ScrollPreservation"), current: false },
+  {
+    name: "ScrollPreservation",
+    href: route("ScrollPreservation"),
+    current: false,
+  },
 ];
 </script>
 
