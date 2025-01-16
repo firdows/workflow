@@ -163,8 +163,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { Head, Link } from "@inertiajs/vue3";
 
 const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "About", href: "/about", current: false },
+  { name: "Home", href: route('home'), current: true },
+  { name: "About", href: route('about'), current: false },
 //   { name: "test", href: "/test", current: false },
   { name: "Test(param)", href: "/test?name=Ahamad", current: false },
   { name: "Progress", href: "/progress", current: false },

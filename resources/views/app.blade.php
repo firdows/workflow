@@ -12,6 +12,7 @@
         // 'resources/js/app.js'
     ])
     @inertiaHead
+    @routes
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
