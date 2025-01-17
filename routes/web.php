@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,7 +37,17 @@ Route::get('/scroll-preservation', function () {
 })->name("ScrollPreservation");
 
 
-Route::get('/register', [UserController::class, 'register'])
-    ->name('register');
+Route::controller(AuthController::class)->group(function () {
 
-Route::post('/register', [UserController::class, 'save_register'])->name('save_register');
+    /**Register */
+    Route::inertia('/register', 'Auth/Register')->name('register');
+    Route::post('/register', 'store');
+    // Route::post('/register', [UserController::class, 'save_register'])->name('save_register');
+
+    /**Login */
+    Route::inertia('/login', 'Auth/Login');
+    Route::post('/login', 'login');
+
+    /**Logout */
+    Route::post('/logout', 'logout');
+});

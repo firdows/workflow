@@ -3,7 +3,7 @@ import { router, useForm } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 import TextInput from '../../Components/TextInput.vue';
 
-const form = ({
+const form = useForm({
     name:null,
     email:null,
     password:null,
@@ -12,7 +12,7 @@ const form = ({
 
 const submit = () => {
     // console.log(form);
-    form.post(route('save_register'), {
+    form.post('/auth/register', {
         preserveScroll: true,
         onSuccess: () => form.reset(),
         onError: () => {

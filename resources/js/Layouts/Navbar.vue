@@ -42,12 +42,13 @@
             </div>
           </div>
         </div>
+
+        <!-- <Link :href="route('register')">Register</Link> -->
         <div
+          v-if="$page.props.auth.user"
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           {{ $page.props.auth.user.name }}
-
-          <Link :href="route('register')">Register</Link>
 
           <button
             type="button"
@@ -114,19 +115,45 @@
                     >Settings</a
                   >
                 </MenuItem>
+                <!-- 
+                @see
+                https://inertiajs.com/links
+                 -->
                 <MenuItem v-slot="{ active }">
-                  <a
-                    href="#"
+                  <Link
+                    href="/logout"
+                    id="headlessui-menu-item-v-13"
+                    role="menuitem"
                     :class="[
                       active ? 'bg-gray-100 outline-none' : '',
                       'block px-4 py-2 text-sm text-gray-700',
                     ]"
-                    >Sign out</a
+                    method="post"
+                    as="link"
+                    >Log out</Link
                   >
                 </MenuItem>
               </MenuItems>
             </transition>
           </Menu>
+        </div>
+        <div v-else>
+          <Link
+            href="/register"
+            :class="[
+              'text-gray-300 hover:bg-gray-700 hover:text-white',
+              'rounded-md px-3 py-2 text-sm font-medium',
+            ]"
+            >Register</Link
+          >
+          <Link
+            href="/login"
+            :class="[
+              'text-gray-300 hover:bg-gray-700 hover:text-white',
+              'rounded-md px-3 py-2 text-sm font-medium',
+            ]"
+            >Login</Link
+          >
         </div>
       </div>
     </div>
@@ -164,17 +191,21 @@ import {
 } from "@headlessui/vue";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
 import { Head, Link } from "@inertiajs/vue3";
+import { route } from "../../../vendor/tightenco/ziggy";
 
 const navigation = [
-  { name: "Home", href: route("home"), current: true },
-  { name: "About", href: route("about"), current: false },
+  // { name: "Home", href: route("home"), current: true },
+  // { name: "About", href: route("about"), current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "About", href: "/about", current: false },
   //   { name: "test", href: "/test", current: false },
   { name: "Test(param)", href: "/test?name=Ahamad", current: false },
   { name: "Progress", href: "/progress", current: false },
   { name: "Shared Data", href: "/shared-data", current: false },
   {
     name: "ScrollPreservation",
-    href: route("ScrollPreservation"),
+    // href: route("ScrollPreservation"),
+    href: "scroll-preservation",
     current: false,
   },
 ];

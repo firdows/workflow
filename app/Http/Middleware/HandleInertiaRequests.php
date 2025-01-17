@@ -40,9 +40,9 @@ class HandleInertiaRequests extends Middleware
             'appName' => config('app.name'),
 
             // Lazily...
-            'auth.user' => fn () => $request->user()
+            'auth.user' => fn() => $request->user()
                 ? $request->user()->only('id', 'name', 'email')
-                : "test",
+                : null,
         ]);
     }
 }
