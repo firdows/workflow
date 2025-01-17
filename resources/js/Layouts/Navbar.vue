@@ -45,7 +45,7 @@
 
         <!-- <Link :href="route('register')">Register</Link> -->
         <div
-          v-if="$page.props.auth.user"
+          v-if="$page.props.auth.user != null"
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           {{ $page.props.auth.user.name }}
@@ -137,7 +137,8 @@
             </transition>
           </Menu>
         </div>
-        <div v-else>
+
+        <div v-else class="gap-1">
           <Link
             href="/register"
             :class="[
@@ -158,7 +159,7 @@
       </div>
     </div>
 
-    <DisclosurePanel class="sm:hidden">
+    <DisclosurePanel class="sm:hidden" v-if="$page.props.auth.user">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <Link
           v-for="item in navigation"

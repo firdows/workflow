@@ -43,7 +43,7 @@ const submit = () => {
       <div class="flex item-center justify-between">
         <div class="flex text-slate-600 mb-2">
           <input type="checkbox" id="remember" v-model="form.remember" />
-          <label for="remember"> Remember me</label>
+          <label for="remember" class="pl-1"> Remember me</label>
         </div>
 
         <p class="text-slate-600">
