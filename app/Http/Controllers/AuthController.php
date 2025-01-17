@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class AuthController extends Controller
@@ -12,12 +14,20 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->avatar);
+
+
+
         $field =  $request->validate([
+            'avatar' => ['file', 'nullable', 'max:1000'],
             'name' => ['required', 'max:150'],
             'email' => ['required', 'max:150', 'email', 'unique:users'],
             'password' => ['required', 'confirmed'],
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $field['avatar'] = Storage::disk('public')->put('avatars', $request->avatar);
+        }
 
         // dd($field);
 
@@ -26,6 +36,8 @@ class AuthController extends Controller
 
         //Login
         Auth::login($user);
+
+        Artisan::call('storage:link');
 
         //Redirect
         return redirect()->route('dashboard');

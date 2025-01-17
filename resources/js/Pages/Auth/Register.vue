@@ -4,32 +4,52 @@ import { reactive } from "vue";
 import TextInput from "../../Components/TextInput.vue";
 
 const form = useForm({
-  name: null,
-  email: null,
-  password: null,
-  password_confirmation: null,
+    name: null,
+    email: null,
+    password: null,
+    password_confirmation: null,
+    avatar: null,
+    preview: null,
 });
 
+const change = (e) => {
+    // console.log(e.target.files[0]);
+    form.avatar = e.target.files[0];
+    form.preview = URL.createObjectURL(e.target.files[0]);
+};
+
 const submit = () => {
-  // console.log(form);
-  form.post("/register", {
-    preserveScroll: true,
-    onSuccess: () => form.reset(),
-    onError: () => {
-      // console.log(form.errors);
-      form.reset("password", "password_confirmation");
-    },
-  });
+    // console.log(form);
+    form.post("/register", {
+        preserveScroll: true,
+        onSuccess: () => form.reset(),
+        onError: () => {
+            // console.log(form.errors);
+            form.reset("password", "password_confirmation");
+        },
+    });
 };
 </script>
 
 
 
 <template lang="">
-    <h1 class="title mb-4">Register</h1>
+    <h1 class="title mb-6 text-2xl">Register</h1>
 
         <div class="w-2/4">
             <form @submit.prevent="submit">
+
+                <div class="grid place-items-center">
+                    <div class="relative w-28 h-28 rounded-full overflow-hidden border border-slate-400">                        
+                        <label for="avatar" class="absolute inset-0 grid content-end cursor-pointer">
+                            <span class="bg-white/90 pb-2 text-center">Avatar</span>
+                        </label>
+                        <!-- <input type="file" id="avatar"  @input="form.avatar = $event.target.files[0]"/> -->
+                        <input type="file" id="avatar"  @input="change" hidden/>
+                        <img :src="form.preview??'storage/default.png'" class="object-cover w-28 h-28"/>                        
+                    </div>
+                    <small class="text-red-700" v-if="form.errors.avatar">{{form.errors.avatar}}</small>
+                </div>
 
                 <TextInput title="Username" name="name" v-model="form.name" :message="form.errors.name" />
 
