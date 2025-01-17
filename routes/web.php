@@ -38,21 +38,23 @@ Route::get('/scroll-preservation', function () {
 })->name("ScrollPreservation");
 
 /** Guest */
-Route::controller(AuthController::class)->group(function () {
+Route::middleware('guest')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
 
-    /**Register */
-    // Route::inertia('/register', 'Auth/Register')->name('register');
-    Route::get('/register', function () {
-        return Auth::guest() ? inertia('Auth/Register') : redirect(route('dashboard'));
-    })->name('register');
-    Route::post('/register', 'store');
+        /**Register */
+        Route::inertia('/register', 'Auth/Register')->name('register');
+        // Route::get('/register', function () {
+        //     return Auth::guest() ? inertia('Auth/Register') : redirect(route('dashboard'));
+        // })->name('register');
+        Route::post('/register', 'store');
 
-    /**Login */
-    // Route::inertia('/login', 'Auth/Login')->name('login');
-    Route::get('/login', function () {
-        return Auth::guest() ? inertia('Auth/Login') : redirect(route('dashboard'));
-    })->name('login');
-    Route::post('/login', 'login');
+        /**Login */
+        Route::inertia('/login', 'Auth/Login')->name('login');
+        // Route::get('/login', function () {
+        //     return Auth::guest() ? inertia('Auth/Login') : redirect(route('dashboard'));
+        // })->name('login');
+        Route::post('/login', 'login');
+    });
 });
 
 
