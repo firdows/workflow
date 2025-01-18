@@ -8,6 +8,7 @@ import { debounce } from "lodash";
 const props = defineProps({
     users: Object,
     searchTerm: String,
+    can:Object
 });
 
 const getDate = ($date) =>
@@ -73,7 +74,7 @@ watch(
                     <th scope="col">Email</th>
                     <th scope="col">Registration Date</th>
                     <th scope="col">Create Date</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" >Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -129,6 +130,7 @@ watch(
                                 method="delete"
                                 as="link"
                                 v-on:click="confirm('Are you sure delete?')"
+                                v-if="can.delete_user"
                             >
                                 Delete
                             </Link>

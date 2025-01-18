@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -24,7 +25,10 @@ class UserController extends Controller
 
         return Inertia::render('User/Index', [
             'users' => $users,
-            'searchTerm' => $request->search
+            'searchTerm' => $request->search,
+            'can' => [
+                'delete_user' => Auth::user() ? Auth::user()->can('delete', User::class) : null
+            ]
         ]);
     }
 
