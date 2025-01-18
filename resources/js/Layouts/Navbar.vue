@@ -85,7 +85,7 @@
                                         '/storage/' +
                                         ($page.props.auth.user.avatar
                                             ? $page.props.auth.user.avatar
-                                            : '/storage/default.png')
+                                            : 'default.png')
                                     "
                                     alt=""
                                 />

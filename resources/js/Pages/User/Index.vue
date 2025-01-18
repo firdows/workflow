@@ -1,8 +1,13 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link ,router} from "@inertiajs/vue3";
 import PaginationLinks from "../../Components/PaginationLinks.vue";
+import { ref,watch } from "vue";
+import { throttle} from "lodash";
+import { debounce} from "lodash";
+
 const props = defineProps({
     users: Object,
+    searchTerm:String
 });
 
 const getDate = ($date) =>
@@ -14,17 +19,34 @@ const getDate = ($date) =>
         minute: "numeric",
     });
 
-// const getIndex = () =>{
-
-//     return
-// };
+/** Serach */
+const search = ref(props.searchTerm);
+// watch(search,(q)=>console.log(search.value)); //1
+// watch(search,(q)=>router.get("/user",{search:q},{preserveState:true}));//2
+/*
+// 3
+watch(search, throttle(
+    (q) => router.get("/user", { search: q }, { preserveState: true }),
+    3000
+));
+*/
+watch(search, debounce(
+    (q) => router.get("/user", { search: q }, { preserveState: true }),
+    500
+));
 </script>
 
 <template>
+     <div class="flex justify-between items-start">
     <div class="mb-6">
         <Link href="/user/create" class="bg-green-300 border rounded p-3"
             >Create User</Link
         >
+
+    </div>
+     <div class="flex item-center ">
+        <input type="search"  v-model="search"  placeholder="Search" class="border focus:border-0"/>
+     </div>
     </div>
     <div class="my-3 shadow-md sm:rounded-lg">
         <table
