@@ -40,7 +40,7 @@ class AuthController extends Controller
         Artisan::call('storage:link');
 
         //Redirect
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard')->with("greet","Welcom to Leravel Inertia Vue app");
     }
 
     public function login(Request $request)
