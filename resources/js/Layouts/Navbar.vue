@@ -82,10 +82,10 @@
                                 <img
                                     class="size-8 rounded-full"
                                     :src="
-                                        $page.props.auth.user.avatar
-                                            ? 'storage/' +
-                                              $page.props.auth.user.avatar
-                                            : 'storage/default.png'
+                                        '/storage/' +
+                                        ($page.props.auth.user.avatar
+                                            ? $page.props.auth.user.avatar
+                                            : '/storage/default.png')
                                     "
                                     alt=""
                                 />

@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(1);
+        $users = User::paginate(20);
         return Inertia::render('User/Index', ['users' => $users]);
     }
 
@@ -22,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('User/Create');
+        return Inertia::render('User/Form');
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -47,8 +47,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $model = User::find($id);
-        return Inertia::render('User/Create', ['model' => $model]);
+        $user = User::find($id);
+        return Inertia::render('User/Form', ['user' => $user]);
     }
 
     /**
@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request);
     }
 
     /**

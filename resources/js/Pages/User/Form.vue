@@ -1,16 +1,27 @@
 <script setup>
 import { router, useForm } from "@inertiajs/vue3";
-import { reactive } from "vue";
+import { reactive, ref, toRefs } from "vue";
 import TextInput from "../../Components/TextInput.vue";
 
+const props = defineProps({
+    user: Object,
+});
+
 const form = useForm({
-    name: null,
-    email: null,
+    name: props.user?.name,
+    email: props.user?.email,
     password: null,
     password_confirmation: null,
     avatar: null,
-    preview: null,
+    preview: props.user ? "/storage/" + props.user.avatar : null,
 });
+
+const btnTitle = props.user ? "Update" : "Create";
+
+// form.defaults({
+//     name: props.user.name,
+//     email: props.user.email,
+// });
 
 const change = (e) => {
     // console.log(e.target.files[0]);
@@ -20,8 +31,11 @@ const change = (e) => {
 
 const submit = () => {
     // console.log(form);
-    form.post("/user/store", {
-        preserveScroll: true,
+    // form.post(props.user?"/user/update":"/user/store", {
+    let method = props.user ? "put" : "post";
+    let url = props.user ? `/user/${props.user.id}` : "/user";
+    form.submit(method, url, {
+        // preserveScroll: true,
         onSuccess: () => form.reset(),
         onError: () => {
             // console.log(form.errors);
@@ -46,14 +60,14 @@ const submit = () => {
                         </label>
                         <!-- <input type="file" id="avatar"  @input="form.avatar = $event.target.files[0]"/> -->
                         <input type="file" id="avatar"  @input="change" hidden/>
-                        <img :src="form.preview??'storage/default.png'" class="object-cover w-28 h-28"/>                        
+                        <img :src="form.preview??'/storage/default.png'" class="object-cover w-28 h-28"/>                        
                     </div>
                     <small class="text-red-700" v-if="form.errors.avatar">{{form.errors.avatar}}</small>
                 </div>
 
                 <TextInput title="Username" name="name" v-model="form.name" :message="form.errors.name" />
 
-                <TextInput title="E-mail" name="email" v-model="form.email" :message="form.errors.email" />
+                <TextInput title="E-mail" name="email" v-model="form.email" :message="form.errors.email"/>
 
                 <TextInput title="Password" name="password" type="password" v-model="form.password" :message="form.errors.password" />
 
@@ -61,7 +75,7 @@ const submit = () => {
                 
                 <div>
                     <p class="text-slate-600 mb-2">Already a user? <a href="#" class="text-link">Login</a></p>
-                    <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-8 px-4 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"    :disabled="(form.processing) && (form.name == null || form.email == null)">Register</button>
+                    <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-8 px-4 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"    :disabled="(form.processing) && (form.name == null || form.email == null)" >{{btnTitle}}</button>
                 </div>
                 
             </form>

@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import PaginationLinks from "../../Components/PaginationLinks.vue";
 const props = defineProps({
     users: Object,
 });
@@ -13,7 +14,10 @@ const getDate = ($date) =>
         minute: "numeric",
     });
 
-const index = props.users.from;
+// const getIndex = () =>{
+
+//     return
+// };
 </script>
 
 <template>
@@ -40,11 +44,17 @@ const index = props.users.from;
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="model in users.data" :key="model.id">
-                    <td scope="col">{{ index++ }}</td>
+                <tr v-for="(model, key) in users.data" :key="model.id">
+                    <td scope="col">
+                        {{ key + props.users.from }}
+                    </td>
                     <td scope="col">
                         <img
-                            :src="'/storage/' + model.avatar"
+                            :src="
+                                model.avatar
+                                    ? '/storage/' + model.avatar
+                                    : 'storage/default.png'
+                            "
                             alt=""
                             class="avatar w-12 rounded border"
                         />
@@ -93,7 +103,9 @@ const index = props.users.from;
         </table>
     </div>
     <div class="mt-2">
-        <Link
+        <PaginationLinks :paginator="users" />
+
+        <!-- <Link
             v-for="link in users.links"
             :key="link.label"
             :href="link.url"
@@ -108,6 +120,6 @@ const index = props.users.from;
         <p class="text-skate-600 text-sm">
             Showing {{ users.from }} to {{ users.to }} of
             {{ users.total }} results
-        </p>
+        </p> -->
     </div>
 </template>
