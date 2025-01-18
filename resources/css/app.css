@@ -1,7 +1,19 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
 
 /* @import "../js/Layouts/AdminLTE3/plugins/fontawesome-free/css/all.min.css";
 @import "../js/Layouts/AdminLTE3/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css";
 @import "../js/Layouts/AdminLTE3/dist/css/adminlte.min.css"; */
+
+@layer base {
+
+
+    th {
+        @apply px-6 py-3
+    }
+
+    td {
+        @apply px-6 py-3
+    }
+}
