@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -40,7 +41,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $field =  $request->validate([
+            'avatar' => ['file', 'nullable', 'max:1000'],
+            'name' => ['required', 'max:150'],
+            'email' => ['required', 'max:150', 'email', 'unique:users'],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $field['avatar'] = Storage::disk('public')->put('avatars', $request->avatar);
+        }
+
+        $user = User::create($field);
+
+        //Redirect
+        return redirect("/user")->with("greet", "Create user successfuly.");
     }
 
     /**
@@ -57,7 +72,7 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         return Inertia::render('User/Form', ['user' => $user]);
     }
 
@@ -66,7 +81,28 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request);
+        // dd($request);
+        $user = User::findOrFail($id);
+
+        $field =  $request->validate([
+            'avatar' => ['file', 'nullable', 'max:1000'],
+            'name' => ['required', 'max:150'],
+            // 'email' => ['required', 'max:150', 'email', "unique:user,{$id}"],
+            // 'password' => ['required', 'confirmed'],
+        ]);
+
+        if ($request->hasFile('avatar')) {
+            $field['avatar'] = Storage::disk('public')->put('avatars', $request->avatar);
+        } elseif ($request->has('preview') && $request->preview) {
+            $field['avatar'] = str_replace("/storage/", "", $request->preview);
+        }
+
+        $user->update($field);
+
+
+
+        //Redirect
+        return redirect("/user")->with("greet", "Update user successfuly.");
     }
 
     /**
@@ -74,6 +110,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::find($id)->delete();
+
+        return redirect("/user")->with("greet", "Deleted");
     }
 }

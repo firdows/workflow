@@ -13,7 +13,7 @@ const form = useForm({
     password: null,
     password_confirmation: null,
     avatar: null,
-    preview: props.user ? "/storage/" + props.user.avatar : null,
+    preview: props.user && props.user.avatar  ? "/storage/" + props.user.avatar : null,
 });
 
 const btnTitle = props.user ? "Update" : "Create";
@@ -35,7 +35,8 @@ const submit = () => {
     let method = props.user ? "put" : "post";
     let url = props.user ? `/user/${props.user.id}` : "/user";
     form.submit(method, url, {
-        // preserveScroll: true,
+        preserveScroll: true,
+        //onBefore:() => form.reset('preview'),
         onSuccess: () => form.reset(),
         onError: () => {
             // console.log(form.errors);
@@ -74,7 +75,6 @@ const submit = () => {
                 <TextInput title="Confirm Password" name="password_confirmation" type="password" v-model="form.password_confirmation" :message="form.errors.password_confirmation" />               
                 
                 <div>
-                    <p class="text-slate-600 mb-2">Already a user? <a href="#" class="text-link">Login</a></p>
                     <button type="submit" class="bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-8 px-4 rounded-lg w-full flex items-center justify-center sm:w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400"    :disabled="(form.processing) && (form.name == null || form.email == null)" >{{btnTitle}}</button>
                 </div>
                 

@@ -1,13 +1,13 @@
 <script setup>
-import { Link ,router} from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
 import PaginationLinks from "../../Components/PaginationLinks.vue";
-import { ref,watch } from "vue";
-import { throttle} from "lodash";
-import { debounce} from "lodash";
+import { ref, watch } from "vue";
+import { throttle } from "lodash";
+import { debounce } from "lodash";
 
 const props = defineProps({
     users: Object,
-    searchTerm:String
+    searchTerm: String,
 });
 
 const getDate = ($date) =>
@@ -30,23 +30,34 @@ watch(search, throttle(
     3000
 ));
 */
-watch(search, debounce(
-    (q) => router.get("/user", { search: q }, { preserveState: true }),
-    500
-));
+watch(
+    search,
+    debounce(
+        (q) => router.get("/user", { search: q }, { preserveState: true }),
+        500
+    )
+);
 </script>
 
 <template>
-     <div class="flex justify-between items-start">
-    <div class="mb-6">
-        <Link href="/user/create" class="bg-green-300 border rounded p-3"
-            >Create User</Link
-        >
+    <p class="p-4 bg-green-200 rounded-md mb-4" v-if="$page.props.flash.greet">
+        {{ $page.props.flash.greet }}
+    </p>
 
-    </div>
-     <div class="flex item-center ">
-        <input type="search"  v-model="search"  placeholder="Search" class="border focus:border-0"/>
-     </div>
+    <div class="flex justify-between items-start">
+        <div class="mb-6">
+            <Link href="/user/create" class="bg-green-300 border rounded p-2">
+                Create User
+            </Link>
+        </div>
+        <div class="flex item-center">
+            <input
+                type="search"
+                v-model="search"
+                placeholder="Search"
+                class="border rounded focus:border-gray-1 p-1"
+            />
+        </div>
     </div>
     <div class="my-3 shadow-md sm:rounded-lg">
         <table
@@ -115,6 +126,9 @@ watch(search, debounce(
                             <Link
                                 :href="'/user/' + model.id"
                                 class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white"
+                                method="delete"
+                                as="link"
+                                v-on:click="confirm('Are you sure delete?')"
                             >
                                 Delete
                             </Link>
