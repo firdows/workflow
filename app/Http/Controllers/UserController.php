@@ -19,7 +19,10 @@ class UserController extends Controller
         $users = User::when($request->search, function ($q) use ($request) {
             $q->where('name', 'like', "%" . $request->search . "%")
                 ->orWhere('email', 'like', "%" . $request->search . "%");
-        })->paginate(20);
+        })->when($request->column && $request->direction,function($q) use($request){
+            $q->orderBy($request->column, $request->direction);
+        })
+        ->paginate(20);
 
 
 
@@ -28,7 +31,8 @@ class UserController extends Controller
             'searchTerm' => $request->search,
             'can' => [
                 'delete_user' => Auth::user() ? Auth::user()->can('delete', User::class) : null
-            ]
+            ],
+            'filters'=> $request->only(['search','column','direction'])
         ]);
     }
 
