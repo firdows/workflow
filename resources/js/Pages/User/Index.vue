@@ -58,7 +58,7 @@ watch(
         },
         { preserveState: true }
       ),
-    500
+    100
   )
 );
 </script>
@@ -94,27 +94,23 @@ watch(
           <th scope="col">#</th>
           <th scope="col">Avatar</th>
           <th scope="col" @click="sort('name')">
-            Username
-            <svg
-              v-if="
-                dataFilters.column == 'name' && dataFilters.direction == 'asc'
-              "
-              class="w-[25px] h-[25px] text-gray-800 dark:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1"
-                d="M12 6v13m0-13 4 4m-4-4-4 4"
-              />
-            </svg>
+            <p
+              class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900">
+              Username             
+              <svg 
+              v-if="dataFilters.column == 'name' && dataFilters.direction == 'asc'"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3 h-3">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+                </svg>
+
+                <svg 
+                v-else
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+</svg>
+
+
+            </p>
           </th>
           <th scope="col">Email</th>
           <th scope="col">Registration Date</th>
