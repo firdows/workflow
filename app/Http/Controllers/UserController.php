@@ -25,7 +25,7 @@ class UserController extends Controller
         ->paginate(20);
 
 
-
+        /** @disregard [OPTIONAL CODE] [OPTIONAL DESCRIPTION] */
         return Inertia::render('User/Index', [
             'users' => $users,
             'searchTerm' => $request->search,

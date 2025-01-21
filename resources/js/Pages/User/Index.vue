@@ -2,8 +2,8 @@
 import { Link, router } from "@inertiajs/vue3";
 import PaginationLinks from "../../Components/PaginationLinks.vue";
 import { ref, watch, reactive } from "vue";
-import { throttle } from "lodash";
-import { debounce } from "lodash";
+import { throttle,debounce } from "lodash";
+import ColumnSorting from "../../Components/ColumnSorting.vue";
 
 const getDate = ($date) =>
   new Date($date).toLocaleDateString("th-TH", {
@@ -70,7 +70,7 @@ watch(
 
   <div class="flex justify-between items-start">
     <div class="mb-6">
-      <Link href="/user/create" class="bg-green-300 border rounded p-2">
+      <Link href="/user/create" class="bg-teal-500 border  border-gray-200 rounded-md p-2">
         Create User
       </Link>
     </div>
@@ -95,7 +95,7 @@ watch(
           <th scope="col">Avatar</th>
           <th scope="col" @click="sort('name')">
             <p
-              class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900">
+              class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-gray-900 cursor-pointer">
               Username             
               <svg 
               v-if="dataFilters.column == 'name' && dataFilters.direction == 'asc'"
@@ -112,7 +112,7 @@ watch(
 
             </p>
           </th>
-          <th scope="col">Email</th>
+          <ColumnSorting name="email" :column="dataFilters.column" :direction="dataFilters.direction" />
           <th scope="col">Registration Date</th>
           <th scope="col">Create Date</th>
           <th scope="col">Action</th>
