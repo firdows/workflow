@@ -22,7 +22,7 @@ class UserController extends Controller
         })->when($request->column && $request->direction,function($q) use($request){
             $q->orderBy($request->column, $request->direction);
         })
-        ->paginate(20);
+        ->paginate(20)->withQueryString();
 
 
         /** @disregard [OPTIONAL CODE] [OPTIONAL DESCRIPTION] */
