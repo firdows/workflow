@@ -151,7 +151,7 @@
                                             active
                                                 ? 'bg-gray-100 outline-none'
                                                 : '',
-                                            'block px-4 py-2 text-sm text-gray-700',
+                                            'block px-4 py-2 w-full text-left text-sm text-gray-700',
                                         ]"
                                         method="post"
                                         as="link"

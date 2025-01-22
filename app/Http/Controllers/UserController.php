@@ -15,6 +15,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        request('column','created_at');
+        request('direction','desc');
         // dd($request);
         $users = User::when($request->search, function ($q) use ($request) {
             $q->where('name', 'like', "%" . $request->search . "%")

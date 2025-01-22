@@ -1,7 +1,7 @@
 <script setup>
 import { Link, router } from "@inertiajs/vue3";
 import PaginationLinks from "../../Components/PaginationLinks.vue";
-import { ref, watch, reactive } from "vue";
+import { ref, watch, reactive, onMounted } from "vue";
 import { throttle, debounce } from "lodash";
 import ColumnSorting from "../../Components/ColumnSorting.vue";
 
@@ -23,9 +23,9 @@ const props = defineProps({
 
 
 const dataFilters = reactive({
-    search: props.filters?.search || "",
-    column: props.filters?.column || "created_at",
-    direction: props.filters?.direction || "asc",
+    search: props.filters.search || "",
+    column: props.filters.column || "created_at",
+    direction: props.filters.direction || "desc",
 });
 
 const sort = (column) => {
@@ -46,11 +46,20 @@ watch(search, throttle(
 ));
 */
 
+// onMounted(() => {
+//     setInterval(() => {
+//         dataFilters.column = "created_at";
+//         dataFilters.direction = "desc";
+//     });
+   
+// })
+
 watch(
     dataFilters,
     //   debounce(
     throttle(
-        (q) =>
+        (q) => {
+            console.log(q);
             router.get(
                 "/user",
                 {
@@ -59,7 +68,8 @@ watch(
                     direction: q.direction,
                 },
                 { preserveState: true }
-            ),
+            )
+        },
         100
     )
 );

@@ -9,9 +9,9 @@ import { Ziggy } from './ziggy';
 
 createInertiaApp({
     title: (title) => `${title} | My App`,
-    resolve: name => {
+    resolve: async(name) => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
-        let page = pages[`./Pages/${name}.vue`];
+        let page = await pages[`./Pages/${name}.vue`];
         // console.log(page);
         page.default.layout = page.default.layout || Layout;
         return page;
